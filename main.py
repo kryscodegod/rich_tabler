@@ -27,7 +27,7 @@ class TableMaker:
     def create_from_standart_content(
         cls, 
         names: StrList, 
-        rows: StrList,
+        rows: Content,
         title: str | None = None,
         color: str | None = None
         ):
