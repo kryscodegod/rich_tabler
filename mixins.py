@@ -12,12 +12,12 @@ class RuText:
     set_data_warn: str = '[red]Помните, что  rich.Table принимает только renderable-объекты и строки!'
 
     def __post_init__(self):
-        console.print(f'{"\n".join([
+        console.print("\n".join([
             self.set_data_first,
             self.set_data_second,
             self.set_data_alt,
             self.set_data_warn
-        ])}')
+        ]))
  
 rt = RuText
 
