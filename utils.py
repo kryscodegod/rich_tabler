@@ -1,6 +1,6 @@
 from models import *
 
-stringify = lambda _list:[str(x) for x in _list]
+stringify = lambda _list: list(map(str, _list))
 
 @checked
 def check_type(strings: StrList, records: DictList) -> TypeCheсker | None:
@@ -10,3 +10,29 @@ def check_type(strings: StrList, records: DictList) -> TypeCheсker | None:
 def check_other_types(strings: AnyList, contents: Content) -> Union[StandardType, ContentType] | None:
     return StandardType(any_list=strings) and ContentType(content=contents)
         
+
+def content_handler(
+        condition: bool,
+        names: StrList,
+        table: Table,
+        container: DictList,
+        color: str | None = None,
+            ) -> None | Table:
+    
+    if condition and check_type(names, container): # type: ignore
+        for name in names:
+            table.add_column(name, style=color)
+        for item in container:
+            table.add_row(*[str(item[i]) for i in names])
+
+    elif condition and check_other_types(names, container): # type: ignore
+        for name in names:
+            table.add_column(name, style=color)
+        for item in container:
+            table.add_row(*stringify(item))
+        return table # type: ignore
+    
+    else:
+        console.print(rt.warn)
+
+

@@ -1,7 +1,7 @@
 from mixins import rt
 from custom_types import *
 from modules import Table, console
-from utils import stringify, check_type, check_other_types
+from utils import check_other_types, content_handler
 
 
 class TableMaker:
@@ -12,17 +12,18 @@ class TableMaker:
             title: str | None = None,
             color: str | None = None,
             ):
+        
         self.names = names
         self.title = title
         self.container = container
         self.table = Table(title=self.title)
-        if self.container and check_type(self.names, self.container):
-            for name in self.names:
-                self.table.add_column(name, style=color)
-            for item in self.container:
-                self.table.add_row(*[str(item[i]) for i in self.names])
-        else:
-            console.print(rt.warn)
+
+        content_handler(
+            self.container,  # type: ignore
+            self.names, self.table, self.container,# type: ignore
+            color
+            )
+        
     
     def get_table(self) -> Table:
         return self.table
@@ -35,15 +36,14 @@ class TableMaker:
         title: str | None = None,
         color: str | None = None
         ):
-        if all([names, rows, check_other_types(names, rows),]):
-            table = Table(title=title)
-            for name in names:
-              table.add_column(name, style=color)
-            for item in rows:
-              table.add_row(*stringify(item))
-            return table
-        else:
-            console.print(f'{rt.note}\n{rt.try_again}')
+        table = Table(title=title)
+
+        result_tab = content_handler(
+            all([names, rows, check_other_types(names, rows)]),
+            names, table, rows, color # type: ignore
+        )
+
+        return result_tab
 
     def __repr__(self) -> str:
         return f'created table with params:\n{"\n".join(
@@ -57,3 +57,5 @@ class TableMaker:
 
 if __name__ == '__main__':
     ...
+
+    

@@ -23,8 +23,9 @@ class ExampleTableDemo(TableMaker):
     
 if __name__ == '__main__':
     names = ['id', 'name', 'status']
-    content = [{'id': '1', 'name': 'Kristy', 'status': 'author'}]
+    content = [{'id': 1, 'name': 'Kristy', 'status': 'author'}]
     ext  = ExampleTableDemo(names, content, title='[magenta]author', color='cyan')
     console.log(ext)
     ext(mod='none')
+    console.rule('[bold magenta]example-table')
     ext()

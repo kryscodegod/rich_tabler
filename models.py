@@ -1,6 +1,6 @@
 from modules import *
 from mixins import rt
-from custom_types import AnyList, DictList, StrList, Content, Union, Callable
+from custom_types import Any, AnyList, DictList, StrList, Content, Union, Callable
 
 
 class ContentType(BaseModel):
@@ -18,6 +18,6 @@ def checked(func: Callable):
         try:
             return func(*args, **kwargs)
         except ValidationError:
-           console.print(rt.warn)
+           console.print(rt.attantion)
     return wrapper
     
