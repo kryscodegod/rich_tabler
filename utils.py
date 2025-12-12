@@ -53,14 +53,14 @@ def content_handler(
         for item in container:
             table.add_row(*[str(item[i]) for i in names])
 
-    elif condition and check_other_types(names, container): # type: ignore
+    elif condition and check_other_types(names, container):
+         # type: ignore
         for name in names:
-
             table.add_column(name, style=color)
-        for item in container:
-
-            table.add_row(*stringify(item))
             
+        for item in container:
+            table.add_row(*stringify(item))
+
         return table # type: ignore
     
     else:
