@@ -1,6 +1,7 @@
 from models import *
 from loguru import logger
 from functools import wraps
+from typing import Union, Callable
 
 logger.remove()
 
@@ -17,9 +18,12 @@ def checked(func: Callable):
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
-           console.print(Panel(f'[blue] execute-function: [red]{func.__name__}'))
+           
            logger.info({'run': True, 'file': __name__, 'extensions': None})
+           console.print(Panel(f'[blue] execute-function: [red]{func.__name__}'))
+           
            return func(*args, **kwargs)
+        
         except ValidationError as error_message:
            logger.error(f'[red]WARNING! [green]{error_message}')
     return wrapper
@@ -41,17 +45,22 @@ def content_handler(
         color: str | None = None,
             ) -> None | Table:
     
-    if condition and check_type(names, container): # type: ignore
+    if condition and check_type(names, container):
+         # type: ignore
         for name in names:
             table.add_column(name, style=color)
+
         for item in container:
             table.add_row(*[str(item[i]) for i in names])
 
     elif condition and check_other_types(names, container): # type: ignore
         for name in names:
+
             table.add_column(name, style=color)
         for item in container:
+
             table.add_row(*stringify(item))
+            
         return table # type: ignore
     
     else:

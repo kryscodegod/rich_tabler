@@ -1,4 +1,4 @@
-from typing import Any, List, Dict, Tuple, Union, Callable
+from typing import Any, List, Dict, Tuple
 
 type AnyList = List[Any]
 
