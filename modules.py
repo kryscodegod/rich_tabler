@@ -1,9 +1,11 @@
+from rich.logging import RichHandler
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.tree import Tree
 from dataclasses import dataclass
 from pydantic import BaseModel, ValidationError
-
+from loguru import logger
+from functools import wraps
 
 console = Console()

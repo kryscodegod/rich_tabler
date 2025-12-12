@@ -10,7 +10,7 @@ class RuText:
     set_data_first: str  = '[green] Передайте в конструктор список названий колонок в формате: [bold yellow]list<str>'
     set_data_second: str = '[green] Затем передайте в конструктор данные для создания столбцов в формате: [bold yellow]list<dict<str, str>>'
     set_data_alt: str = '[green] Вы также можете передать в конструктор данные в формате [bold yellow]list<tuple> [green]с методом ~ [bold yellow]create_from_standard_content()'
-    set_data_warn: str = '[red]Помните, что  rich.Table принимает только renderable-объекты и строки!'
+    set_data_warn: str = '[red] Помните, что  rich.Table принимает только renderable-объекты и строки!'
 
     def __post_init__(self):
         console.print(Panel("\n".join([

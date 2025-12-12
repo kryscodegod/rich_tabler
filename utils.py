@@ -1,6 +1,28 @@
 from models import *
+from loguru import logger
+from functools import wraps
+
+logger.remove()
+
+logger.add( 
+    RichHandler(rich_tracebacks=True, markup=True),
+    format = '{message}',
+    level='INFO'
+    )
+
 
 stringify = lambda _list: list(map(str, _list))
+
+def checked(func: Callable):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+           console.print(Panel(f'[blue] execute-function: [red]{func.__name__}'))
+           logger.info({'run': True, 'file': __name__, 'extensions': None})
+           return func(*args, **kwargs)
+        except ValidationError as error_message:
+           logger.error(f'[red]WARNING! [green]{error_message}')
+    return wrapper
 
 @checked
 def check_type(strings: StrList, records: DictList) -> TypeCheсker | None:
