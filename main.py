@@ -1,7 +1,8 @@
-from mixins import rt
 from custom_types import *
-from modules import Table, console
-from utils import check_other_types, content_handler
+from modules import console
+from mixins import rt
+from modules import Table
+from utils import stringify, check_other_types, content_handler
 
 
 class TableMaker:
@@ -35,7 +36,7 @@ class TableMaker:
         rows: Content,
         title: str | None = None,
         color: str | None = None
-        ):
+        ) -> Table | None:
         table = Table(title=title)
 
         result_tab = content_handler(
@@ -44,6 +45,29 @@ class TableMaker:
         )
 
         return result_tab
+    
+    @classmethod
+    def create_custom_table(
+        cls,
+        names: List[str],
+        data: Tuple[str],
+        **kwargs: Any
+    ) -> Table | None:
+        valid_attrs = {key: value for key, value in kwargs.items()
+            if hasattr(Table(), key)}
+        
+        table = Table(**valid_attrs) # type: ignore
+
+        for name in names:
+            table.add_column(name)
+        
+        if isinstance(data, tuple):
+           table.add_row(*stringify(data))
+        else:
+            console.print(f'{rt.note}\n{rt.warn}')
+            raise ValueError(rt.invalid_data)
+        
+        return table
 
     def __repr__(self) -> str:
         return f'created table with params:\n{"\n".join(

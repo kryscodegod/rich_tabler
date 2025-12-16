@@ -6,6 +6,7 @@ class RuText:
     info: str = 'Класс для демонстрации примеров создания простых таблиц с помощью данного пакета'
     warn: str = '[red]Ошибка! Неверный формат данных!'
     note: str = '[red]Что-то пошло не так!'
+    invalid_data: str = 'Данные должны быть кортежем строк!'
     try_again: str = '[green] Попробуйте передать в конструктор данные в формате: [bold yellow]list<tuple>'
     set_data_first: str  = '[green] Передайте в конструктор список названий колонок в формате: [bold yellow]list<str>'
     set_data_second: str = '[green] Затем передайте в конструктор данные для создания столбцов в формате: [bold yellow]list<dict<str, str>>'

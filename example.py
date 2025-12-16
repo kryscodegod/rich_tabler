@@ -1,4 +1,6 @@
-from main import *
+from modules import console
+from main import rt, TableMaker
+from custom_types import StrList, DictList
 
 
 class ExampleTableDemo(TableMaker):

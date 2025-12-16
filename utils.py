@@ -18,7 +18,7 @@ def checked(func: Callable):
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
-           logger.info({'run': True, 'file': __name__, 'extensions': None})
+           logger.info(f"'run': {True}, 'file': {__name__}")
            console.print(Panel(f'[blue] execute-function: [red]{func.__name__}'))
            
            return func(*args, **kwargs)
