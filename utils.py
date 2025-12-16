@@ -14,6 +14,8 @@ logger.add(
 
 stringify = lambda _list: list(map(str, _list))
 
+get_valid_attrs = lambda kwr: {key: value for key, value in kwr.items() if hasattr(Table(), key)}
+
 def checked(func: Callable):
     @wraps(func)
     def wrapper(*args, **kwargs):

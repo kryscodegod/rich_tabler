@@ -2,7 +2,7 @@ from custom_types import *
 from modules import console
 from mixins import rt
 from modules import Table
-from utils import check_other_types, content_handler
+from utils import check_other_types, content_handler, get_valid_attrs
 
 
 class TableMaker:
@@ -13,14 +13,11 @@ class TableMaker:
             title: str | None = None,
             color: str | None = None,
             **kwargs: Any
-            ):
-        valid_attrs = {key: value for key, value in kwargs.items()
-            if hasattr(Table(), key)}
-        
+            ) -> None:
         self.names = names
         self.title = title
         self.container = container
-        self.table = Table(title=self.title, **valid_attrs)
+        self.table = Table(title=self.title, **get_valid_attrs(kwargs))
 
         content_handler(
             self.container,  # type: ignore
@@ -28,7 +25,6 @@ class TableMaker:
             color
             )
         
-    
     def get_table(self) -> Table:
         return self.table
     
@@ -38,9 +34,10 @@ class TableMaker:
         names: StrList, 
         rows: Content,
         title: str | None = None,
-        color: str | None = None
+        color: str | None = None,
+        **kwargs: Any
         ) -> Table | None:
-        table = Table(title=title)
+        table = Table(title=title, **get_valid_attrs(kwargs))
 
         result_tab = content_handler(
             all([names, rows, check_other_types(names, rows)]),
@@ -61,4 +58,5 @@ class TableMaker:
 
 if __name__ == '__main__':
     ...
-    
+   
+
