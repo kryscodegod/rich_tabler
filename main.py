@@ -1,5 +1,5 @@
-from rich_tabler.custom_types import Any, AnyList, DictList, StrList, Container # type: ignore
 from rich_tabler.mixins import rt # type: ignore
+from rich_tabler.custom_types import Any, AnyList, DictList, StrList, Container # type: ignore
 from rich_tabler.modules import Table, Tree, console # type: ignore
 from rich_tabler.utils import check_type, check_other_types, content_handler, get_valid_attrs, content_preview # type: ignore
 
