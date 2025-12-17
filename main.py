@@ -17,6 +17,7 @@ class TableMaker:
         self.title = title
         self.container = container or []
         self.table = Table(title=self.title, **get_valid_attrs(kwargs))
+        
         content_handler(
             self.names,
             self.table,

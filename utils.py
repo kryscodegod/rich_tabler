@@ -17,6 +17,7 @@ stringify = lambda _list: list(map(str, _list))
 get_valid_attrs = lambda kwr: {key: value for key, value in kwr.items() if hasattr(Table(), key)} # type: ignore
 
 def checked(func: Callable):
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
@@ -42,7 +43,6 @@ def check_other_types(strings: AnyList, contents: Content) -> Union[StandardType
         
 
 def content_handler(
-        #condition: bool,
         names: StrList, # type: ignore
         table: Table, # type: ignore
         container: Container, # type: ignore
