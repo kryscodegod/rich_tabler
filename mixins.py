@@ -1,4 +1,4 @@
-from modules import Panel, console, dataclass
+from rich_tabler.modules import Panel, console, dataclass # type: ignore
 
 @dataclass
 class RuText:
@@ -9,10 +9,10 @@ class RuText:
     created: str = 'Создана таблица со следующими параметрами'
     attr_not_found: str = 'Не найден метод или свойство'
     invalid_data: str = 'Данные должны быть кортежем строк!'
-    try_again: str = '[green] Попробуйте передать в конструктор данные в формате: [bold yellow]list<tuple>'
+    try_again: str = '[green] Попробуйте передать в конструктор данные в формате: [bold yellow]list<tuple>[/]'
     set_data_first: str  = '[green] Передайте в конструктор список названий колонок в формате: [bold yellow]list<str>'
     set_data_second: str = '[green] Затем передайте в конструктор данные для создания столбцов в формате: [bold yellow]list<dict<str, str>>'
-    set_data_alt: str = '[green] Вы также можете передать в конструктор данные в формате [bold yellow]list<tuple> [green]с методом ~ [bold yellow]create_from_standard_content()'
+    set_data_alt: str = '[green] Вы также можете сделать предварительный просмотр передаваемых данных с помощью метода ~ [bold yellow]content_data_preview'
     set_data_warn: str = '[red] Помните, что  rich.Table принимает только renderable-объекты и строки!'
 
     def __post_init__(self):

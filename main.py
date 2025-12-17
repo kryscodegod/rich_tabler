@@ -1,7 +1,7 @@
-from custom_types import *
-from mixins import rt
-from modules import Table
-from utils import check_other_types, content_handler, get_valid_attrs
+from rich_tabler.custom_types import Any, AnyList, DictList, StrList, Container # type: ignore
+from rich_tabler.mixins import rt # type: ignore
+from rich_tabler.modules import Table, Tree, console # type: ignore
+from rich_tabler.utils import check_type, check_other_types, content_handler, get_valid_attrs # type: ignore
 
 
 class TableMaker:
@@ -15,36 +15,42 @@ class TableMaker:
             ) -> None:
         self.names = names
         self.title = title
-        self.container = container
+        self.container = container or []
         self.table = Table(title=self.title, **get_valid_attrs(kwargs))
-
         content_handler(
-            self.container,  # type: ignore
-            self.names, self.table, self.container,# type: ignore
-            color
-            )
-        
+            self.names,
+            self.table,
+            self.container,
+            color=color
+            ) 
+    
+    @property
     def get_table(self) -> Table:
         return self.table
     
     @classmethod
-    def create_from_standard_content(
+    def content_data_preview(
         cls, 
         names: StrList, 
-        rows: Content,
-        title: str | None = None,
-        color: str | None = None,
-        **kwargs: Any
-        ) -> Table | None:
-        table = Table(title=title, **get_valid_attrs(kwargs))
+        container: Container,
+        ) -> Tree:
 
-        result_tab = content_handler(
-            all([names, rows, check_other_types(names, rows)]),
-            names, table, rows, color # type: ignore
-        )
+        tree = Tree('[magenta]data-preview')
+        ls = tree.add('[green]cols-data')
+        ls.add(f'[blue]is_list[/]: [red] {isinstance(names, list)}')
+        ls.add(f'[blue]is_empty[/]: [red]{False if len(names) else True}')
+        cont = tree.add('[green]row_content-data')
+        cont.add(('[blue]is_dict-list[/]: [red]'
+                  f'{True if check_type(names, container) else False}'))
+        cont.add(('[blue]is_list-of-tuple[/]: [red]'
+                  f'{True if check_other_types(names, container) else False}'))
+        end = tree.add('[magenta]result-data')
+        end.add((f'[cyan]signature: [black]< {" | ".join(names)} >[/]'
+                 ' -- [cyan]final-size: [red]'
+                 f'{len(container) if isinstance(container, list) else None}'))
 
-        return result_tab
-    
+        return tree
+
     def __repr__(self) -> str:
         return f'{rt.created}:\n{"\n".join(
             [
@@ -55,7 +61,7 @@ class TableMaker:
         )}'
     
 
-if __name__ == '__main__':
-    ...
+
     
+   
     

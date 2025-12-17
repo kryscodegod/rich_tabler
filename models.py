@@ -1,15 +1,15 @@
-from modules import *
-from mixins import rt
-from custom_types import AnyList, DictList, StrList, Content
+from rich_tabler.modules import * # type: ignore
+from rich_tabler.mixins import rt # type: ignore
+from rich_tabler.custom_types import AnyList, DictList, StrList, Content, Container # type: ignore
 
 
-class ContentType(BaseModel):
+class ContentType(BaseModel): # type: ignore
     content: Content
 
-class StandardType(BaseModel):
+class StandardType(BaseModel): # type: ignore
     any_list: AnyList
 
-class TypeCheсker(BaseModel):
+class TypeCheсker(BaseModel): # type: ignore
     string_list: StrList
     dict_list: DictList
 

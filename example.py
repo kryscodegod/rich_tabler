@@ -1,6 +1,6 @@
-from modules import console
-from main import rt, TableMaker
-from custom_types import StrList, DictList
+from rich_tabler.modules import console # type: ignore
+from rich_tabler.main import rt, TableMaker # type: ignore
+from rich_tabler.custom_types import StrList, DictList # type: ignore
 
 
 class ExampleTableDemo(TableMaker):
@@ -15,15 +15,14 @@ class ExampleTableDemo(TableMaker):
 
     def __call__(self, mod='default'):
         if mod == 'default':
-           console.print(self.get_table(), justify='center')
+           console.print(self.get_table, justify='center')
         else:
             rt()
     
     def __str__(self) -> str:
         return rt.info
     
-    
-if __name__ == '__main__':
+def demo() -> None:
     names = ['id', 'name', 'status']
     content = [{'id': 1, 'name': 'Kristy', 'status': 'author'}]
     ext  = ExampleTableDemo(names, content, title='[magenta]author', color='cyan')
@@ -31,5 +30,8 @@ if __name__ == '__main__':
     ext(mod='none')
     console.rule('[bold magenta]example-table')
     ext()
+    
+if __name__ == '__main__':
+    demo()
 
     
