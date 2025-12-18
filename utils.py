@@ -26,7 +26,7 @@ def checked(func: Callable):
 
         except Exception as error_msg:
            logger.error((f'{rt.note}\n[green]exception-type: [red]{error_msg}\n'
-                        f'[green]in function: [yellow]{func.__name__}'))
+                f'[green]in function: [yellow]{func.__name__}'))
            
     return wrapper
 
@@ -79,7 +79,7 @@ def content_handler(
     
        
 
-def content_preview(names: StrList, container: Container,) -> Tree: # type: ignore
+def content_preview(names: StrList, container: Container) -> Tree: # type: ignore
 
         tree = Tree('[magenta]data-preview') # type: ignore
 
