@@ -7,6 +7,7 @@ class RuText:
     warn: str = '[red]Ошибка! Неверный формат данных!'
     note: str = '[red]Что-то пошло не так!'
     created: str = 'Создана таблица со следующими параметрами'
+    success: str = '[green]Таблица создана успешно!'
     attr_not_found: str = 'Не найден метод или свойство'
     invalid_data: str = 'Данные должны быть кортежем строк!'
     try_again: str = '[green] Попробуйте передать в конструктор данные в формате: [bold yellow]list<tuple>[/]'

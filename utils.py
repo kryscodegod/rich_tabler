@@ -2,7 +2,7 @@ from loguru import logger
 from functools import wraps
 from typing import Union, Callable
 from rich_tabler.mixins import rt # type: ignore
-from rich_tabler.modules import console, Tree, Table, RichHandler, ValidationError # type: ignore
+from rich_tabler.modules import Tree, Table, RichHandler, ValidationError # type: ignore
 from rich_tabler.custom_types import AnyList, DictList, StrList, Container # type: ignore
 from rich_tabler.models import Content, ContentType, StandardType, TypeChecker # type: ignore
 
@@ -18,12 +18,14 @@ logger.add(
 def checked(func: Callable):
     @wraps(func)
     def wrapper(*args, **kwargs):
+
         try:
            return func(*args, **kwargs)
-        except ValidationError: # type: ignore
-           logger.debug(f'[red] validation-error in func: [yellow]{func.__name__}')
-        except Exception as error_message:
-           logger.error(f'[red]WARNING! [green]{error_message}')
+        except ValidationError:...
+
+        except Exception as error_msg:
+           logger.error((f'{rt.note}\n[green]exception-type: [red]{error_msg}\n'
+                        f'[green]in function: [yellow]{func.__name__}'))
 
     return wrapper
 
@@ -54,6 +56,8 @@ def add_content(
         for item in container:
             table.add_row(*list(map(str, item)))
 
+    logger.info(rt.success)
+
     
 def content_handler(
         names: StrList, # type: ignore
@@ -64,13 +68,15 @@ def content_handler(
     
     if check_type(names, container):
         add_content(names, table, container, color=color)
-      
+    
     elif check_other_types(names, container):
         add_content(names, table, container, content_type='list_tuple', color=color)
 
     else:
-        console.print(rt.warn) # type: ignore
-
+        logger.error(rt.warn) # type: ignore
+        
+    
+       
 
 def content_preview(names: StrList, container: Container,) -> Tree: # type: ignore
 
