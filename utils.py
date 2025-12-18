@@ -16,6 +16,7 @@ logger.add(
 
 
 def checked(func: Callable):
+
     @wraps(func)
     def wrapper(*args, **kwargs):
 
@@ -26,7 +27,7 @@ def checked(func: Callable):
         except Exception as error_msg:
            logger.error((f'{rt.note}\n[green]exception-type: [red]{error_msg}\n'
                         f'[green]in function: [yellow]{func.__name__}'))
-
+           
     return wrapper
 
 @checked
