@@ -1,6 +1,7 @@
+from typing import Any
 from rich_tabler.mixins import rt # type: ignore
 from rich_tabler.modules import Table, Tree # type: ignore
-from rich_tabler.custom_types import Any, DictList, StrList, Container # type: ignore
+from rich_tabler.custom_types import  DictList, StrList, Container # type: ignore
 from rich_tabler.utils import content_handler, content_preview # type: ignore
 
 
