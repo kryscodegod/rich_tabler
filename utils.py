@@ -16,8 +16,8 @@ logger.add(
 
 
 def checked(func: Callable) -> Callable:
-    @wraps(func)
     def wrapper(*args, **kwargs):
+
         try:
            return func(*args, **kwargs)
         except ValidationError:... 
@@ -27,10 +27,11 @@ def checked(func: Callable) -> Callable:
 def all_exceptions(func: Callable) -> Callable:
     @wraps(func)
     def wrapper(*args, **kwargs):
+
         try:
            return func(*args, **kwargs)
         except Exception as error_msg:
-           logger.error((f'{rt.note}\n[green]exception-type: [red]{error_msg}\n'
+           logger.error((f'[green]exception-type: [red]{error_msg}\n'
                 f'[green]in function: [yellow]{func.__name__}'))
            
     return wrapper
