@@ -8,7 +8,7 @@ __author__ = 'Кристина Алиева'
 
 __version__ = '1.1'
 
-console.print(f'[magenta]init package [red]v{__version__}')
+
 
 
 

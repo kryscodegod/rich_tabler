@@ -64,9 +64,7 @@ def add_content(
         for item in container:
             table.add_row(*list(map(str, item)))
 
-    logger.info(rt.success)
 
-    
 def content_handler(
         names: StrList, # type: ignore
         table: Table, # type: ignore
